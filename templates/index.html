@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,28 +10,25 @@
 </head>
 <body>
     <form method="POST">
-        <input autocomplete="off" type="text" name="task_description">
-        <input type="submit" value="save task">
+        <input class="todo-input" autocomplete="off" type="text" name="task_description">
+        <input class="submit-button" type="submit" value="save task">
     </form>
 
     <table>
-        <tr>
-            <th>id</th>
-            <th>item name</th>
-            <th>completed</th>
-            <th></th>
-        </tr>
+        <ul>
+            <li>
+                {% for record in data %}
 
-        {% for record in data %}
+                        <tr>
+                            <th>{{ record[1] }}</th>
+                            <th><a href="/delete/{{ record[0] }}"><input type="button" value="delete"></a></th>
+                        </tr>
 
-            <tr>
-                <th>{{ loop.index }}</th>
-                <th>{{ record[1] }}</th>
-                <th>{{ record[2] }}</th>
-                <th><a href="/delete/{{ record[0] }}"><input type="button" value="delete"></a></th>
-            </tr>
+                    {% endfor %}
+            </li>
+        </ul>
 
-        {% endfor %}
+        
 
     </table>
 </body>
