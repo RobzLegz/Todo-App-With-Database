@@ -2,16 +2,87 @@
 <html lang="en">
 <head>
     <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto+Condensed&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Robs Todo App</title>
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            background: linear-gradient(90deg, rgb(195, 102, 0), rgb(255, 106, 8));
+        }
+        li{
+            list-style: none;
+        }
+        th{
+            font-family: 'Roboto Condensed', sans-serif;
+            font-size: 1.7rem;
+            color: #fff;
+        }
+        form{
+            position: relative;
+            width: 600px;
+            height: 30px;
+        }
+        .todo-input{
+            width: 600px;
+            height: 30px;
+            padding: 5px 10px;
+            font-family: 'Roboto Condensed', sans-serif;
+            font-size: 20px;
+            color: #000;
+            border: none;
+            outline: none;
+        }
+        .todo-input-button{
+            position: absolute;
+            right: -30px;
+            height: 40px;
+            width: 40px;
+            font-family: 'Roboto Condensed', sans-serif;
+            font-size: 30px;
+            outline: none;
+            border: none;
+            top: 0;
+            background: rgb(255, 106, 8);
+            color: #fff;
+            cursor: pointer;
+        }
+        .todo-heading{
+            font-family: 'Lobster', cursive;
+            font-size: 3rem;
+            color: #fff;
+            position: absolute;
+            top: 10%;
+        }
+        .delete-btn{
+            height: 30px;
+            width: 100px;
+            font-size: 25px;
+            color: #000;
+            text-align: center;
+            border: none;
+            background: #fff;
+            outline: none;
+            cursor: pointer;
+            margin: 0 30px;
+        }
+    </style>
 </head>
 <body>
+    <h1 class="todo-heading">Rob's Todo App</h1>
     <form method="POST">
         <input class="todo-input" autocomplete="off" type="text" name="task_description">
-        <input class="submit-button" type="submit" value="save task">
+        <input class="todo-input-button" type="submit" value="+">
     </form>
 
     <table>
@@ -19,12 +90,14 @@
             <li>
                 {% for record in data %}
 
-                        <tr>
-                            <th>{{ record[1] }}</th>
-                            <th><a href="/delete/{{ record[0] }}"><input type="button" value="delete"></a></th>
-                        </tr>
 
-                    {% endfor %}
+                    <tr>
+                        <th>{{ record[1] }}</th>
+                        <th><a href="/delete/{{ record[0] }}"><input class="delete-btn" type="button" value="Done"></a></th>
+                    </tr>
+
+
+                {% endfor %}
             </li>
         </ul>
 
